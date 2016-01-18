@@ -11,7 +11,7 @@ Author URI: http://www.claudiolabarbera.com
  * Get all registered menus
  * @return array List of menus with slug and description
  */
-function get_all_menus () {
+function wp_api_v2_menus_get_all_menus () {
     $menus = [];
     foreach (get_registered_nav_menus() as $slug => $description) {
         $obj = new stdClass;
@@ -28,7 +28,7 @@ function get_all_menus () {
  * @param  array $data WP REST API data variable
  * @return object Menu's data with his items
  */
-function get_menu_data ( $data ) {
+function wp_api_v2_menus_get_menu_data ( $data ) {
     $menu = new stdClass;
     $menu = wp_get_nav_menu_object( $data['id'] );
     $menu->items = wp_get_nav_menu_items($menu->term_id);
