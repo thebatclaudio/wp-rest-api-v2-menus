@@ -38,11 +38,11 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
 add_action( 'rest_api_init', function () {
     register_rest_route( 'menus/v1', '/menus', array(
         'methods' => 'GET',
-        'callback' => 'get_all_menus',
+        'callback' => 'wp_api_v2_menus_get_all_menus',
     ) );
 
     register_rest_route( 'menus/v1', '/menus/(?P<id>[a-zA-Z(-]+)', array(
         'methods' => 'GET',
-        'callback' => 'get_menu_data',
+        'callback' => 'wp_api_v2_menus_get_menu_data',
     ) );
 } );
