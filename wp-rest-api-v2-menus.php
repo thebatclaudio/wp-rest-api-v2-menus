@@ -1,7 +1,7 @@
 <?php 
 /*
 Plugin Name: WP-REST-API V2 Menus
-Version: 0.1.1
+Version: 0.2
 Description: Adding menus endpoints on WP REST API v2
 Author: Claudio La Barbera
 Author URI: http://www.claudiolabarbera.com
@@ -30,8 +30,11 @@ function wp_api_v2_menus_get_all_menus () {
  */
 function wp_api_v2_menus_get_menu_data ( $data ) {
     $menu = new stdClass;
-    $menu = wp_get_nav_menu_object( $data['id'] );
-    $menu->items = wp_get_nav_menu_items($menu->term_id);
+	$menu->items = [];
+    if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $data['id'] ] ) ) {
+        $menu = get_term( $locations[ $data['id'] ] );
+        $menu->items = wp_get_nav_menu_items($menu->term_id);
+    }
     return $menu;
 }
 
