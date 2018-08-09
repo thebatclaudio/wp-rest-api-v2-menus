@@ -44,7 +44,7 @@ add_action( 'rest_api_init', function () {
         'callback' => 'wp_api_v2_menus_get_all_menus',
     ) );
 
-    register_rest_route( 'menus/v1', '/menus/(?P<id>[a-zA-Z(-]+)', array(
+    register_rest_route( 'menus/v1', '/menus/(?P<id>[a-zA-Z0-9(-]+)', array(
         'methods' => 'GET',
         'callback' => 'wp_api_v2_menus_get_menu_data',
     ) );
