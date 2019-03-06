@@ -38,8 +38,6 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
         $child_items = [];
         // pull all child menu items into separate object
         foreach ($menu_items as $key => $item) {
-            $slug = get_post_field( 'post_name', $menu_item->object_id );
-            $menu_item->slug = $slug;
             if ($item->menu_item_parent) {
                 array_push($child_items, $item);
                 unset($menu_items[$key]);
@@ -53,6 +51,17 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
                     if (!$item->child_items) $item->child_items = [];
                     array_push($item->child_items, $child);
                     unset($child_items[$key]);
+                }
+            }
+        }
+        
+        // check if there is acf installed
+        if( class_exists('acf') ) {
+            foreach($menu_items as $menu_key => $menu_item) {
+                $fields = get_fields($menu_item->ID);
+                foreach($fields as $field_key => $item) {
+                    // add all acf custom fields
+                    $menu_items[$menu_key]->$field_key = $item;
                 }
             }
         }
