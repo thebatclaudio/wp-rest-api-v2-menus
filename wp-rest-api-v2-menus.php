@@ -12,12 +12,19 @@ Author URI: https://thebatclaud.io
  * @return array List of menus with slug and description
  */
 function wp_api_v2_menus_get_all_menus () {
-    $menus = [];
-    foreach (get_registered_nav_menus() as $slug => $description) {
-        $obj = new stdClass;
-        $obj->slug = $slug;
-        $obj->description = $description;
-        $menus[] = $obj;
+    $menus = get_terms( 'nav_menu', array( 'hide_empty' => true ) );
+
+    foreach($menus as $key => $menu) {
+        // check if there is acf installed
+        if( class_exists('acf') ) {
+            $fields = get_fields($menu);
+            if(!empty($fields)) {
+                foreach($fields as $field_key => $item) {
+                    // add all acf custom fields
+                    $menus[$key]->$field_key = $item;
+                }
+            }
+        }
     }
 
     return $menus;
