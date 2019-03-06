@@ -33,8 +33,31 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
 	$menu->items = [];
     if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $data['id'] ] ) ) {
         $menu = get_term( $locations[ $data['id'] ] );
-        $menu->items = wp_get_nav_menu_items($menu->term_id);
+        $menu_items = wp_get_nav_menu_items($menu->term_id);
+        // wordpress does not group child menu items with parent menu items
+        $child_items = [];
+        // pull all child menu items into separate object
+        foreach ($menu_items as $key => $item) {
+            if ($item->menu_item_parent) {
+                array_push($child_items, $item);
+                unset($menu_items[$key]);
+            }
+        }
+
+        // push child items into their parent item in the original object
+        foreach ($menu_items as $item) {
+            foreach ($child_items as $key => $child) {
+                if ($child->menu_item_parent == $item->post_name) {
+                    if (!$item->child_items) $item->child_items = [];
+                    array_push($item->child_items, $child);
+                    unset($child_items[$key]);
+                }
+            }
+        }
+
+        $menu->items = $menu_items;
     }
+
     return $menu;
 }
 
