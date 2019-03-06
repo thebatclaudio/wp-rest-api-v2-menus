@@ -38,6 +38,8 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
         $child_items = [];
         // pull all child menu items into separate object
         foreach ($menu_items as $key => $item) {
+            $slug = get_post_field( 'post_name', $menu_item->object_id );
+            $menu_item->slug = $slug;
             if ($item->menu_item_parent) {
                 array_push($child_items, $item);
                 unset($menu_items[$key]);
