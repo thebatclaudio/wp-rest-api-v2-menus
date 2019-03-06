@@ -59,9 +59,11 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
         if( class_exists('acf') ) {
             foreach($menu_items as $menu_key => $menu_item) {
                 $fields = get_fields($menu_item->ID);
-                foreach($fields as $field_key => $item) {
-                    // add all acf custom fields
-                    $menu_items[$menu_key]->$field_key = $item;
+                if(!empty($fields)) {
+                    foreach($fields as $field_key => $item) {
+                        // add all acf custom fields
+                        $menu_items[$menu_key]->$field_key = $item;
+                    }
                 }
             }
         }
