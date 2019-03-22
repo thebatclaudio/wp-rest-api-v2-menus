@@ -54,7 +54,7 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
         // push child items into their parent item in the original object
         foreach ($menu_items as $item) {
             foreach ($child_items as $key => $child) {
-                if ($child->menu_item_parent == $item->post_name) {
+                if ($child->menu_item_parent == strval($item->ID)) {
                     if (!$item->child_items) $item->child_items = [];
                     array_push($item->child_items, $child);
                     unset($child_items[$key]);
