@@ -36,7 +36,14 @@ function wp_api_v2_menus_get_all_menus () {
  **/
 
 function wp_api_v2_menu_get_all_locations () {
-    return get_nav_menu_locations();
+    $nav_menu_locations =  get_nav_menu_locations();
+    $locations = new stdClass;
+    foreach ($nav_menu_locations as $location_slug => $menu_id) {
+        $locations->{$location_slug} = get_term($location_slug);
+        $locations->{$location_slug}->slug = $location_slug;
+        $locations->{$location_slug}->menu = get_term($menu_id);
+    }
+    return $locations;
 }
 
 /**
