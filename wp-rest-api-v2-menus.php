@@ -45,12 +45,16 @@ function wp_api_v2_menu_get_all_locations () {
  * @return object Menu's data with his items
  */
 function wp_api_v2_locations_get_menu_data ( $data ) {
+    // Create default empty object
     $menu = new stdClass;
 
     // this could be replaced with `if (has_nav_menu($data['id']))`
     if (($locations = get_nav_menu_locations()) && isset($locations[$data['id']])) {
+        // Replace default empty object with the location object
+        $menu = get_term( $locations[ $data['id'] ] );
         $menu->items = wp_api_v2_menus_get_menu_items($locations[$data['id']]);
     } else {
+        // Keep `items` array in order to break expectation from API user.
         $menu->items = [];
         $menu->error = "No location has been found. Please ensure you passed an existing location ID or location slug.";
     }
@@ -60,14 +64,10 @@ function wp_api_v2_locations_get_menu_data ( $data ) {
 
 /**
  * Retrieve items for a specific menu
+ * @param $id Menu id
  * @return array List of menu items
  */
-function wp_api_v2_menus_get_menu_items($id_or_slug) {
-    if (is_int($id_or_slug)) {
-        $id = $id_or_slug;
-    } else {
-        $id = wp_get_nav_menu_object($id_or_slug);
-    }
+function wp_api_v2_menus_get_menu_items($id) {
     $menu_items = wp_get_nav_menu_items($id);
 
     // wordpress does not group child menu items with parent menu items
@@ -120,8 +120,13 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
     if (has_nav_menu($data['id'])) {
         $menu = wp_api_v2_locations_get_menu_data($data);
     } else if (is_nav_menu($data['id'])) {
-        $menu = new stdClass;
-        $menu->items = wp_api_v2_menus_get_menu_items($data['id']);
+        if (is_int($data['id'])) {
+            $id = $data['id'];
+        } else {
+            $id = wp_get_nav_menu_object($data['id']);
+        }
+        $menu = get_term($id);
+        $menu->items = wp_api_v2_menus_get_menu_items($id);
     } else {
         $menu = new stdClass;
         $menu->items = [];
