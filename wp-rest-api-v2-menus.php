@@ -54,9 +54,7 @@ function wp_api_v2_locations_get_menu_data ( $data ) {
         $menu = get_term( $locations[ $data['id'] ] );
         $menu->items = wp_api_v2_menus_get_menu_items($locations[$data['id']]);
     } else {
-        // Keep `items` array in order to break expectation from API user.
-        $menu->items = [];
-        $menu->error = "No location has been found. Please ensure you passed an existing location ID or location slug.";
+        return new WP_Error( 'not_found', 'No location has been found with this id or slug: `'.$data['id'].'`. Please ensure you passed an existing location ID or location slug.', array( 'status' => 404 ) );
     }
 
     return $menu;
@@ -128,9 +126,7 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
         $menu = get_term($id);
         $menu->items = wp_api_v2_menus_get_menu_items($id);
     } else {
-        $menu = new stdClass;
-        $menu->items = [];
-        $menu->error = "No menu has been found. Please ensure you passed an existing menu ID, menu slug, location ID or location slug.";
+        return new WP_Error( 'not_found', 'No menu has been found with this id or slug: `'.$data['id'].'`. Please ensure you passed an existing menu ID, menu slug, location ID or location slug.', array( 'status' => 404 ) );
     }
 
     return $menu;
