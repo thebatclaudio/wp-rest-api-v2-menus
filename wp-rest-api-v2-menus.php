@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WP-REST-API V2 Menus FORKED
+Plugin Name: WP-REST-API V2 Menus
 Version: 0.5
 Description: Adding menus endpoints on WP REST API v2
 Author: Claudio La Barbera
@@ -88,7 +88,7 @@ function wp_api_v2_menus_get_menu_items($id) {
             unset($menu_items[$key]);
         }
     }
-
+  
     // push child items into their parent item in the original object
     foreach ($menu_items as $item) {
         foreach ($child_items as $key => $child) {
