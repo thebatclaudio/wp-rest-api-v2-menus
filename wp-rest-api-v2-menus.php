@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WP-REST-API V2 Menus FORKED
+Plugin Name: WP-REST-API V2 Menus
 Version: 0.5
 Description: Adding menus endpoints on WP REST API v2
 Author: Claudio La Barbera
