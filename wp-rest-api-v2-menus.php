@@ -39,7 +39,11 @@ function wp_api_v2_menu_get_all_locations () {
     $nav_menu_locations =  get_nav_menu_locations();
     $locations = new stdClass;
     foreach ($nav_menu_locations as $location_slug => $menu_id) {
-        $locations->{$location_slug} = get_term($location_slug);
+        if(get_term($location_slug) !== NULL) {
+            $locations->{$location_slug} = get_term($location_slug);
+        } else {
+            $locations->{$location_slug} = new stdClass;
+        }
         $locations->{$location_slug}->slug = $location_slug;
         $locations->{$location_slug}->menu = get_term($menu_id);
     }
