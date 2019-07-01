@@ -68,6 +68,17 @@ function wp_api_v2_locations_get_menu_data ( $data ) {
         return new WP_Error( 'not_found', 'No location has been found with this id or slug: `'.$data['id'].'`. Please ensure you passed an existing location ID or location slug.', array( 'status' => 404 ) );
     }
 
+    // check if there is acf installed
+    if( class_exists('acf') ) {
+        $fields = get_fields($menu);
+        if(!empty($fields)) {
+            foreach($fields as $field_key => $item) {
+                // add all acf custom fields
+                $menu->$field_key = $item;
+            }
+        }
+    }
+
     return $menu;
 }
 
@@ -138,6 +149,17 @@ function wp_api_v2_menus_get_menu_data ( $data ) {
         $menu->items = wp_api_v2_menus_get_menu_items($id);
     } else {
         return new WP_Error( 'not_found', 'No menu has been found with this id or slug: `'.$data['id'].'`. Please ensure you passed an existing menu ID, menu slug, location ID or location slug.', array( 'status' => 404 ) );
+    }
+
+    // check if there is acf installed
+    if( class_exists('acf') ) {
+        $fields = get_fields($menu);
+        if(!empty($fields)) {
+            foreach($fields as $field_key => $item) {
+                // add all acf custom fields
+                $menu->$field_key = $item;
+            }
+        }
     }
 
     return $menu;
