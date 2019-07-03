@@ -123,6 +123,19 @@ function wp_api_v2_menus_dna_test( &$parents, $child ) {
 function wp_api_v2_menus_get_menu_items( $id ) {
 	$menu_items = wp_get_nav_menu_items( $id );
 
+	// check if there is acf installed
+	if ( class_exists( 'acf' ) ) {
+		foreach ( $menu_items as $menu_key => $menu_item ) {
+			$fields = get_fields( $menu_item->ID );
+			if ( ! empty( $fields ) ) {
+				foreach ( $fields as $field_key => $item ) {
+					// add all acf custom fields
+					$menu_items[ $menu_key ]->$field_key = $item;
+				}
+			}
+		}
+	}
+
 	// wordpress does not group child menu items with parent menu items
 	$child_items = [];
 	// pull all child menu items into separate object
@@ -141,19 +154,6 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 			}
 		}
 	} while(count($child_items));
-
-	// check if there is acf installed
-	if ( class_exists( 'acf' ) ) {
-		foreach ( $menu_items as $menu_key => $menu_item ) {
-			$fields = get_fields( $menu_item->ID );
-			if ( ! empty( $fields ) ) {
-				foreach ( $fields as $field_key => $item ) {
-					// add all acf custom fields
-					$menu_items[ $menu_key ]->$field_key = $item;
-				}
-			}
-		}
-	}
 
 	return $menu_items;
 }
