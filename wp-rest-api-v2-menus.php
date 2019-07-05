@@ -155,7 +155,7 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 		}
 	} while(count($child_items));
 
-	return $menu_items;
+	return array_values($menu_items);
 }
 
 /**
