@@ -1,4 +1,5 @@
 # WP REST API V2 Menus
+[![Build Status](https://scrutinizer-ci.com/g/thebatclaudio/wp-rest-api-v2-menus/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thebatclaudio/wp-rest-api-v2-menus/build-status/master)
 Adding menus endpoints on WP REST API v2
 
 ## Routes
