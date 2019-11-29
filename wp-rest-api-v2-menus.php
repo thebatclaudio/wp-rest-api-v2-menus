@@ -140,9 +140,15 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 	$child_items = [];
 	// pull all child menu items into separate object
 	foreach ( $menu_items as $key => $item ) {
-		// add slug to menu items
-		$slug = basename( get_permalink($item->object_id) );
-		$item->slug = $slug;
+
+		if($item->type == 'post_type') {
+			// add slug to menu items
+			$slug = basename( get_permalink($item->object_id) );
+			$item->slug = $slug;
+		} else if($item->type == 'taxonomy') {
+			$cat = get_category($item->object_id);
+			$item->slug = $cat->slug;
+		}
 
 		if ( $item->menu_item_parent ) {
 			array_push( $child_items, $item );
