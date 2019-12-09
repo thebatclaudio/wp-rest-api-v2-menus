@@ -148,6 +148,12 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 		} else if($item->type == 'taxonomy') {
 			$cat = get_category($item->object_id);
 			$item->slug = $cat->slug;
+		} else if($item->type == 'post_type_archive') {
+			$post_type_data = get_post_type_object($item->object);
+
+			if ($post_type_data->has_archive) {
+				$item->slug = $post_type_data->rewrite['slug'];
+			}
 		}
 
 		if ( $item->menu_item_parent ) {
