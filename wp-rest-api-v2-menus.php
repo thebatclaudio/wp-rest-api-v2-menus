@@ -145,7 +145,7 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 			// add slug to menu items
 			$slug = basename( get_permalink($item->object_id) );
 			$item->slug = $slug;
-			if ($item->thumbnail_id) {
+			if (isset($item->thumbnail_id) && $item->thumbnail_id) {
 				$item->thumbnailSrc = wp_get_attachment_image_url($item->thumbnail_id, 'post-thumbnail');
 			}
 		} else if($item->type == 'taxonomy') {
