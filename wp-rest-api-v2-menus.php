@@ -146,7 +146,7 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 			$slug = basename( get_permalink($item->object_id) );
 			$item->slug = $slug;
 		} else if($item->type == 'taxonomy') {
-			$cat = get_category($item->object_id);
+			$cat = get_term($item->object_id);
 			$item->slug = $cat->slug;
 		} else if($item->type == 'post_type_archive') {
 			$post_type_data = get_post_type_object($item->object);
