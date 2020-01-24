@@ -22,3 +22,5 @@ Get menus data from location's slug
 
 ## Compatibility
 Compatible with ACF menu's custom attributes and menu item's custom attributes.
+
+Compatible with [Menu Image, Icons made easy](https://wordpress.org/plugins/menu-image/).
