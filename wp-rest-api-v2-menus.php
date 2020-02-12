@@ -148,6 +148,10 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 			if (isset($item->thumbnail_id) && $item->thumbnail_id) {
 				$item->thumbnail_src = wp_get_attachment_image_url(intval($item->thumbnail_id), 'post-thumbnail');
 			}
+			if (isset($item->thumbnail_hover_id) && $item->thumbnail_hover_id) {
+				$item->thumbnail_hover_src = wp_get_attachment_image_url(intval($item->thumbnail_hover_id), 'post-thumbnail');
+			}
+
 		} else if($item->type == 'taxonomy') {
 			$cat = get_term($item->object_id);
 			$item->slug = $cat->slug;
@@ -162,6 +166,9 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 		if ( $item->menu_item_parent ) {
 			if (isset($item->thumbnail_id) && $item->thumbnail_id) {
 				$item->thumbnail_src = wp_get_attachment_image_url(intval($item->thumbnail_id), 'post-thumbnail');
+			}
+			if (isset($item->thumbnail_hover_id) && $item->thumbnail_hover_id) {
+				$item->thumbnail_hover_src = wp_get_attachment_image_url(intval($item->thumbnail_hover_id), 'post-thumbnail');
 			}
 
 			array_push( $child_items, $item );
