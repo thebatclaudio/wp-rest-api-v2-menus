@@ -226,20 +226,24 @@ add_action( 'rest_api_init', function () {
 	register_rest_route( 'menus/v1', '/menus', array(
 		'methods'  => 'GET',
 		'callback' => 'wp_api_v2_menus_get_all_menus',
+		'permission_callback' => '__return_true'
 	) );
 
 	register_rest_route( 'menus/v1', '/menus/(?P<id>[a-zA-Z0-9_-]+)', array(
 		'methods'  => 'GET',
 		'callback' => 'wp_api_v2_menus_get_menu_data',
+		'permission_callback' => '__return_true'
 	) );
 
 	register_rest_route( 'menus/v1', '/locations/(?P<id>[a-zA-Z0-9_-]+)', array(
 		'methods'  => 'GET',
 		'callback' => 'wp_api_v2_locations_get_menu_data',
+		'permission_callback' => '__return_true'
 	) );
 
 	register_rest_route( 'menus/v1', '/locations', array(
 		'methods'  => 'GET',
 		'callback' => 'wp_api_v2_menu_get_all_locations',
+		'permission_callback' => '__return_true'
 	) );
 } );
