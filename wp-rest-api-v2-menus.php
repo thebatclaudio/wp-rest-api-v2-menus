@@ -26,8 +26,8 @@ function wp_api_v2_menus_get_all_menus() {
 			}
 		}
 	}
-
-	return $menus;
+	
+	return apply_filters('wp_api_v2_menus__menus', $menus);
 }
 
 /**
@@ -48,7 +48,7 @@ function wp_api_v2_menu_get_all_locations() {
 		$locations->{$location_slug}->menu = get_term( $menu_id );
 	}
 
-	return $locations;
+	return apply_filters('wp_api_v2_menus__locations', $locations);
 }
 
 /**
@@ -82,7 +82,7 @@ function wp_api_v2_locations_get_menu_data( $data ) {
 		}
 	}
 
-	return $menu;
+	return apply_filters('wp_api_v2_menus__menu', $menu);
 }
 
 /**
@@ -199,7 +199,7 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 		}
 	} while(count($child_items));
 
-	return array_values($menu_items);
+	return apply_filters('wp_api_v2_menus__menu_items', array_values($menu_items));
 }
 
 /**
@@ -239,7 +239,7 @@ function wp_api_v2_menus_get_menu_data( $data ) {
 		}
 	}
 
-	return $menu;
+	return apply_filters('wp_api_v2_menus__menu', $menu);
 }
 
 add_action( 'rest_api_init', function () {
