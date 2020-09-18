@@ -116,7 +116,7 @@ function wp_api_v2_menus_dna_test( &$parents, $child ) {
 /**
  * Search object in an array by ID
  */
-function find_object_by_id( $array, $id ) {
+function wp_api_v2_find_object_by_id( $array, $id ) {
 	foreach ( $array as $element ) {
 		if ( $id == $element->ID ) {
 				return $element;
@@ -187,7 +187,7 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 	// push child items into their parent item in the original object
 	do {
 		foreach($child_items as $key => $child_item) {
-			$parent = find_object_by_id( $all_menu_items, $child_item->menu_item_parent );
+			$parent = wp_api_v2_find_object_by_id( $all_menu_items, $child_item->menu_item_parent );
 
 			if ( empty( $parent ) ) {
 				unset($child_items[$key]);
