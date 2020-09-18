@@ -114,6 +114,19 @@ function wp_api_v2_menus_dna_test( &$parents, $child ) {
 }
 
 /**
+ * Search object in an array by ID
+ */
+function find_object_by_id( $array, $id ) {
+	foreach ( $array as $element ) {
+		if ( $id == $element->ID ) {
+				return $element;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Retrieve items for a specific menu
  *
  * @param $id Menu id
@@ -122,6 +135,7 @@ function wp_api_v2_menus_dna_test( &$parents, $child ) {
  */
 function wp_api_v2_menus_get_menu_items( $id ) {
 	$menu_items = wp_get_nav_menu_items( $id );
+	$all_menu_items = $menu_items;
 
 	// check if there is acf installed
 	if ( class_exists( 'acf' ) ) {
@@ -173,7 +187,13 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 	// push child items into their parent item in the original object
 	do {
 		foreach($child_items as $key => $child_item) {
-			if(wp_api_v2_menus_dna_test($menu_items, $child_item)) {
+			$parent = find_object_by_id( $all_menu_items, $child_item->menu_item_parent );
+
+			if ( empty( $parent ) ) {
+				unset($child_items[$key]);
+			}
+
+			else if (wp_api_v2_menus_dna_test($menu_items, $child_item)) {
 				unset($child_items[$key]);
 			}
 		}
