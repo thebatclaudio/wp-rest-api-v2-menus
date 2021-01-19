@@ -157,7 +157,7 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 
 		if($item->type == 'post_type') {
 			// add slug to menu items
-			$slug = basename( get_permalink($item->object_id) );
+			$slug = get_post_field( 'post_name', $item->object_id );
 			$item->slug = $slug;
 		} else if($item->type == 'taxonomy') {
 			$cat = get_term($item->object_id);
