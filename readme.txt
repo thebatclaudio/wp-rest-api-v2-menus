@@ -3,7 +3,7 @@ Contributors: ClaudioLaBarbera, alebarbieri, joshuaslatedesign, raik, beltranren
 Tags: api, json, json-rest-api, menu-routes, menus, REST, wp-api, wp-rest-api, v2
 Requires at least: 4.4
 Tested up to: 5.5.1
-Stable tag: 0.8
+Stable tag: 0.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,8 @@ Of course! This is the GitHub Repository https://github.com/thebatclaudio/wp-res
 Nothing to show. This plugin has no settings or frontend, it just extends WP API with new routes.
 
 == Changelog ==
+
+0.8.1 - Use post_name instead of basename (Bug fix for static home page)
 
 0.8 - Added support for apply_filters + Bug fix permision_callback (WP 5.5.0) + Bug fix infinite loop
 
