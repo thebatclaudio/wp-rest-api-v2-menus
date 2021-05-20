@@ -46,6 +46,8 @@ Nothing to show. This plugin has no settings or frontend, it just extends WP API
 
 == Changelog ==
 
+0.9 - Fix possible name colision caused by ACF field with existing name (example: if we have an ACF field named "title" it will overwrite the original post's title). Now ACF fields are grouped in a "acf" object.
+
 0.8.1 - Use post_name instead of basename (Bug fix for static home page)
 
 0.8 - Added support for apply_filters + Bug fix permision_callback (WP 5.5.0) + Bug fix infinite loop
