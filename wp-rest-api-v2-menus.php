@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP-REST-API V2 Menus
-Version: 0.9
+Version: 0.10
 Description: Adding menus endpoints on WP REST API v2
 Author: Claudio La Barbera
 Author URI: https://thebatclaud.io
