@@ -3,7 +3,7 @@ Contributors: ClaudioLaBarbera, alebarbieri, joshuaslatedesign, raik, beltranren
 Tags: api, json, json-rest-api, menu-routes, menus, REST, wp-api, wp-rest-api, v2
 Requires at least: 4.4
 Tested up to: 5.5.1
-Stable tag: 0.8.1
+Stable tag: 0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
