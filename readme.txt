@@ -3,7 +3,7 @@ Contributors: ClaudioLaBarbera, alebarbieri, joshuaslatedesign, raik, beltranren
 Tags: api, json, json-rest-api, menu-routes, menus, REST, wp-api, wp-rest-api, v2
 Requires at least: 4.4
 Tested up to: 5.5.1
-Stable tag: 0.9
+Stable tag: 0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,7 +46,11 @@ Nothing to show. This plugin has no settings or frontend, it just extends WP API
 
 == Changelog ==
 
-0.9 - Fix possible name colision caused by ACF field with existing name (example: if we have an ACF field named "title" it will overwrite the original post's title). Now ACF fields are grouped in a "acf" object.
+0.10 - Fix possible name colision caused by ACF field with existing name (example: if we have an ACF field named "title" it will overwrite the original post's title). Now ACF fields are grouped in a "acf" object.
+
+0.9.1 - Wrong release
+
+0.9 - Wrong release
 
 0.8.1 - Use post_name instead of basename (Bug fix for static home page)
 
