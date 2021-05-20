@@ -19,9 +19,11 @@ function wp_api_v2_menus_get_all_menus() {
 		if ( class_exists( 'acf' ) ) {
 			$fields = get_fields( $menu );
 			if ( ! empty( $fields ) ) {
+				$menu[ $key ]->acf = new stdClass();
+
 				foreach ( $fields as $field_key => $item ) {
 					// add all acf custom fields
-					$menus[ $key ]->$field_key = $item;
+					$menus[ $key ]->acf->$field_key = $item;
 				}
 			}
 		}
@@ -75,9 +77,11 @@ function wp_api_v2_locations_get_menu_data( $data ) {
 	if ( class_exists( 'acf' ) ) {
 		$fields = get_fields( $menu );
 		if ( ! empty( $fields ) ) {
+			$menu->acf = new stdClass();
+
 			foreach ( $fields as $field_key => $item ) {
 				// add all acf custom fields
-				$menu->$field_key = $item;
+				$menu->acf->$field_key = $item;
 			}
 		}
 	}
@@ -142,9 +146,11 @@ function wp_api_v2_menus_get_menu_items( $id ) {
 		foreach ( $menu_items as $menu_key => $menu_item ) {
 			$fields = get_fields( $menu_item->ID );
 			if ( ! empty( $fields ) ) {
+				$menu_items[$menu_key]->acf = new stdClass();
+
 				foreach ( $fields as $field_key => $item ) {
 					// add all acf custom fields
-					$menu_items[ $menu_key ]->$field_key = $item;
+					$menu_items[ $menu_key ]->acf->$field_key = $item;
 				}
 			}
 		}
@@ -232,9 +238,11 @@ function wp_api_v2_menus_get_menu_data( $data ) {
 	if ( class_exists( 'acf' ) ) {
 		$fields = get_fields( $menu );
 		if ( ! empty( $fields ) ) {
+			$menu->acf = new stdClass();
+
 			foreach ( $fields as $field_key => $item ) {
 				// add all acf custom fields
-				$menu->$field_key = $item;
+				$menu->acf->$field_key = $item;
 			}
 		}
 	}
