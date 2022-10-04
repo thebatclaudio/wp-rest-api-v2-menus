@@ -19,7 +19,7 @@ function wp_api_v2_menus_get_all_menus() {
 		if ( class_exists( 'acf' ) ) {
 			$fields = get_fields( $menu );
 			if ( ! empty( $fields ) ) {
-				$menu[ $key ]->acf = new stdClass();
+				$menus[ $key ]->acf = new stdClass();
 
 				foreach ( $fields as $field_key => $item ) {
 					// add all acf custom fields
