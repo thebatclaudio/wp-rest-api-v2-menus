@@ -28,7 +28,7 @@ function wp_api_v2_menus_get_all_menus() {
 			}
 		}
 	}
-	
+
 	return apply_filters('wp_api_v2_menus__menus', $menus);
 }
 
@@ -139,6 +139,12 @@ function wp_api_v2_find_object_by_id( $array, $id ) {
  */
 function wp_api_v2_menus_get_menu_items( $id ) {
 	$menu_items = wp_get_nav_menu_items( $id );
+
+    // fallback: if menu_items is null then return empty array
+    if($menu_items === false) {
+        return [];
+    }
+
 	$all_menu_items = $menu_items;
 
 	// check if there is acf installed
