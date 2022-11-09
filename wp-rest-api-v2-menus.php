@@ -67,7 +67,12 @@ function wp_api_v2_locations_get_menu_data( $data ) {
 	// this could be replaced with `if (has_nav_menu($data['id']))`
 	if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $data['id'] ] ) ) {
 		// Replace default empty object with the location object
-		$menu        = get_term( $locations[ $data['id'] ] );
+		$menu = get_term( $locations[ $data['id'] ] );
+
+		if ( is_wp_error( $menu ) || null === $menu ) {
+			return new WP_Error( 'not_found', 'No location has been found with this id or slug: `' . $data['id'] . '`. Please ensure you passed an existing location ID or location slug.', array( 'status' => 404 ) );
+		}
+
 		$menu->items = wp_api_v2_menus_get_menu_items( $locations[ $data['id'] ] );
 	} else {
 		return new WP_Error( 'not_found', 'No location has been found with this id or slug: `' . $data['id'] . '`. Please ensure you passed an existing location ID or location slug.', array( 'status' => 404 ) );
