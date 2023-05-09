@@ -24,3 +24,11 @@ Get menus data from location's slug
 Compatible with ACF menu's custom attributes and menu item's custom attributes.
 
 Compatible with [Menu Image, Icons made easy](https://wordpress.org/plugins/menu-image/).
+
+## Contributors
+
+<a href="https://github.com/thebatclaudio/wp-rest-api-v2-menus/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=thebatclaudio/wp-rest-api-v2-menus" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
